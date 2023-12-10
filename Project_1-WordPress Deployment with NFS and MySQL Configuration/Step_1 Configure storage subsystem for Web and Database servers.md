@@ -10,7 +10,9 @@ Step 1 — Prepare a Web Server
 
 5, Use gdisk utility to create a single partition on each of the 3 disks
 
-``` sudo gdisk /dev/xvdf ```
+``` 
+sudo gdisk /dev/xvdf
+```
 
 PROMPT:
 
