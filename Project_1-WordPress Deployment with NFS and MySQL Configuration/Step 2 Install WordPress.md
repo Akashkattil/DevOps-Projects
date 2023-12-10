@@ -78,9 +78,9 @@ Change permissions and configuration so Apache could use WordPress:
 Enable TCP port 80 in Inbound Rules configuration for your Web Server EC2 (enable from everywhere 0.0.0.0/0 or from your workstation’s IP)
 
 Try to access from your browser the link to your WordPress
-
+```
 http:///wordpress/
-
+```
 Fill out your DB credentials:
 
 If you see a message of WordPress – it means your WordPress has successfully connected to your remote MySQL database
