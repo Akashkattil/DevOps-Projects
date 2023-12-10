@@ -57,47 +57,71 @@ Now,  your changes has been configured succesfuly, exit out of the gdisk console
 Note: Previously, in Ubuntu we used apt command to install packages, in RedHat/CentOS a different package manager is used, so we shall use yum command instead.
 
 7, Use pvcreate utility to mark each of 3 disks as physical volumes (PVs) to be used by LVM
-`sudo pvcreate /dev/xvdf1
+```
+sudo pvcreate /dev/xvdf1
 sudo pvcreate /dev/xvdg1
-sudo pvcreate /dev/xvdh1`
+sudo pvcreate /dev/xvdh1
+```
 
 8, Verify that your Physical volume has been created successfully by running sudo pvs
 
 9, Use vgcreate utility to add all 3 PVs to a volume group (VG). Name the VG webdata-vg
-`sudo vgcreate webdata-vg /dev/xvdh1 /dev/xvdg1 /dev/xvdf1`
+```
+sudo vgcreate webdata-vg /dev/xvdh1 /dev/xvdg1 /dev/xvdf1
+```
 
 10, Verify that your VG has been created successfully by running
-`sudo vgs`
+```
+sudo vgs
+``
 
 11, Use lvcreate utility to create 2 logical volumes. apps-lv (Use half of the PV size), and logs-lv Use the remaining space of the PV size. NOTE: apps-lv will be used to store data for the Website while, logs-lv will be used to store data for logs.
-`sudo lvcreate -n apps-lv -L 14G webdata-vg
-sudo lvcreate -n logs-lv -L 14G webdata-vg`
+```
+sudo lvcreate -n apps-lv -L 14G webdata-vg
+sudo lvcreate -n logs-lv -L 14G webdata-vg
+```
 
 12, Verify that your Logical Volume has been created successfully by running
-`sudo lvs`
+```
+sudo lvs
+```
 
 13, Verify the entire setup
-`sudo vgdisplay -v #view complete setup - VG, PV, and LV
-sudo lsblk `
+```
+sudo vgdisplay -v #view complete setup - VG, PV, and LV
+sudo lsblk 
+```
 14, Use mkfs.ext4 to format the logical volumes with ext4 filesystem
-`sudo mkfs -t ext4 /dev/webdata-vg/apps-lv
-sudo mkfs -t ext4 /dev/webdata-vg/logs-lv`
+```
+sudo mkfs -t ext4 /dev/webdata-vg/apps-lv
+sudo mkfs -t ext4 /dev/webdata-vg/logs-lv
+```
 
 15, Create /var/www/html directory to store website files
-`sudo mkdir -p /var/www/html`
+```
+sudo mkdir -p /var/www/html
+```
 
 16, Create /home/recovery/logs to store backup of log data
-`sudo mkdir -p /home/recovery/logs
+```
+sudo mkdir -p /home/recovery/logs
 Mount /var/www/html on apps-lv logical volume
-sudo mount /dev/webdata-vg/apps-lv /var/www/html/`
+sudo mount /dev/webdata-vg/apps-lv /var/www/html/
+```
 
 17, Use rsync utility to backup all the files in the log directory /var/log into /home/recovery/logs (This is required before mounting the file system)
-`sudo rsync -av /var/log/. /home/recovery/logs/`
+```
+sudo rsync -av /var/log/. /home/recovery/logs/
+```
 
 19, Mount /var/log on logs-lv logical volume. (Note that all the existing data on /var/log will be deleted. That is why step 15 above is very important)
-`sudo mount /dev/webdata-vg/logs-lv /var/log`
+```
+sudo mount /dev/webdata-vg/logs-lv /var/log
+```
 
 20, Restore log files back into /var/log directory
-`sudo rsync -av /home/recovery/logs/. /var/log`
+```
+sudo rsync -av /home/recovery/logs/. /var/log
+```
 
 21, Update /etc/fstab file so that the mount configuration will persist after restart of the server. Click on the next Step To update the /etc/fstab file
