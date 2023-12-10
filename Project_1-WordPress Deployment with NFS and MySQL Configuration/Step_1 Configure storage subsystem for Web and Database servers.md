@@ -10,10 +10,11 @@ Step 1 — Prepare a Web Server
 
 5, Use gdisk utility to create a single partition on each of the 3 disks
 
-```sudo gdisk /dev/xvdf```
+` sudo gdisk /dev/xvdf `
 PROMPT:
 
-` GPT fdisk (gdisk) version 1.0.3
+```
+GPT fdisk (gdisk) version 1.0.3
 
 Partition table scan:
   MBR: not present
@@ -44,7 +45,8 @@ PARTITIONS!!
 Do you want to proceed? (Y/N): yes
 OK; writing new GUID partition table (GPT) to /dev/xvdf.
 The operation has completed successfully.
-Now,  your changes has been configured succesfuly, exit out of the gdisk console and do the same for the remaining disks. `
+Now,  your changes has been configured succesfuly, exit out of the gdisk console and do the same for the remaining disks.
+```
 
 5, Use lsblk utility to view the newly configured partition on each of the 3 disks.
 
