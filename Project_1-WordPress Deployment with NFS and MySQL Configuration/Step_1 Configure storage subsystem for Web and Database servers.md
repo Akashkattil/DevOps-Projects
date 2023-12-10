@@ -1,6 +1,6 @@
 ## Launch an EC2 instance that will serve as "web server".
 Step 1 — Prepare a Web Server
-`* 1` Launch an EC2 instance that will serve as "Web Server". Create 3 volumes in the same AZ as your Web Server EC2, each of 10 GiB. Learn How to Add EBS Volume to an EC2 instance here and Attach all three volumes one by one to your Web Server EC2 instance
+1, Launch an EC2 instance that will serve as "Web Server". Create 3 volumes in the same AZ as your Web Server EC2, each of 10 GiB. Learn How to Add EBS Volume to an EC2 instance here and Attach all three volumes one by one to your Web Server EC2 instance
 
 2, Open up the Linux terminal to begin configuration. 
 
@@ -10,7 +10,7 @@ Step 1 — Prepare a Web Server
 
 5, Use gdisk utility to create a single partition on each of the 3 disks
 
-`sudo gdisk /dev/xvdf`
+```sudo gdisk /dev/xvdf```
 PROMPT:
 
 ` GPT fdisk (gdisk) version 1.0.3
