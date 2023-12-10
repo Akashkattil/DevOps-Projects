@@ -1,5 +1,5 @@
+# Prepare a Web Server
 ## Launch an EC2 instance that will serve as "web server".
-Prepare a Web Server
 1, Launch an EC2 instance that will serve as "Web Server". Create 3 volumes in the same AZ as your Web Server EC2, each of 10 GiB. Learn How to Add EBS Volume to an EC2 instance here and Attach all three volumes one by one to your Web Server EC2 instance
 
 2, Open up the Linux terminal to begin configuration. 
@@ -138,3 +138,7 @@ Test the configuration and reload the daemon
 sudo mount -a
 sudo systemctl daemon-reload
 ```
+# Prepare a db Server
+## Launch an EC2 instance that will serve as "db server".
+
+Prepare the Database Server Launch a second RedHat EC2 instance that will have a role – ‘DB Server’ Repeat the same steps as for the Web Server, but instead of apps-lv create db-lv and mount it to /db directory instead of /var/www/html/.
