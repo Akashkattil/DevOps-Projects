@@ -64,7 +64,7 @@ Configure the Web Servers to work with a single MySQL database
 Launch a new EC2 instance with RHEL 8 Operating System
 
 Install NFS client
-``
+```
 sudo yum install nfs-utils nfs4-acl-tools -y
 Mount /var/www/ and target the NFS server’s export for apps
 sudo mkdir /var/www
