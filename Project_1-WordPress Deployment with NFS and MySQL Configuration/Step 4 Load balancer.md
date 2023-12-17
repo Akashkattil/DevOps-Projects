@@ -2,7 +2,7 @@ When we access a website in the Internet we use an URL and we do not really know
 
 Each URL contains a domain name part, which is translated (resolved) to IP address of a target server that will serve requests when open a website in the Internet. Translation (resolution) of domain names is perormed by DNS servers.
 
-When we have just one Web server and load increases – we want to serve more and more customers, we can add more CPU and RAM or completely replace the server with a more powerful one – this is called "vertical scaling". This approach has limitations – at some point we reach the maximum capacity of CPU and RAM that can be installed into wer server.
+When we have just one Web server and load increases – we want to serve more and more customers, we can add more CPU and RAM or completely replace the server with a more stronger one – this is called "vertical scaling". This approach has limitations – at some point we reach the maximum capacity of CPU and RAM that can be installed into server.
 
 Another approach used to cater for increased traffic is "horizontal scaling" – distributing load across multiple Web servers. This approach is much more common and can be applied almost seamlessly and almost infinitely.
 
@@ -63,7 +63,7 @@ Restart apache server
 sudo systemctl restart apache2
 ```
 
-4, Verify that our configuration works – try to access wer LB’s public IP address or Public DNS name from wer browser:
+4, Verify that our configuration works – try to access  LB’s public IP address or Public DNS name from  browser:
 ```
 http://<Load-Balancer-Public-IP-Address-or-Public-DNS-Name>/index.php
 ```
@@ -73,6 +73,6 @@ Open two ssh/Putty consoles for both Web Servers and run following command:
 ```
 sudo tail -f /var/log/httpd/access_log
 ```
-Try to refresh wer browser page http:///index.php several times and make sure that both servers receive HTTP GET requests from wer LB – new records must appear in each server’s log file. The number of requests to each server will be approximately the same since we set loadfactor to the same value for both servers – it means that traffic will be disctributed evenly between them.
+Try to refresh  browser page http:///index.php several times and make sure that both servers receive HTTP GET requests from  LB – new records must appear in each server’s log file. The number of requests to each server will be approximately the same since we set loadfactor to the same value for both servers – it means that traffic will be disctributed evenly between them.
 
-If we have configured everything correctly – wer users will not even notice that their requests are served by more than one server.
+If we have configured everything correctly –  users will not even notice that their requests are served by more than one server.
