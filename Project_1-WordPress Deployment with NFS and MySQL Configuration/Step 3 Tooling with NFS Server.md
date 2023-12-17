@@ -73,7 +73,7 @@ sudo mkdir /var/www
 sudo mount -t nfs -o rw,nosuid <NFS-Server-Private-IP-Address>:/mnt/apps /var/www
 ```
 Verify that NFS was mounted successfully by running df -h. Make sure that the changes will persist on Web Server after reboot:
-````
+```
 sudo vi /etc/fstab
 ```
 add following line
