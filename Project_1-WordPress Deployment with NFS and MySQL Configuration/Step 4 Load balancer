@@ -58,7 +58,7 @@ sudo vi /etc/apache2/sites-available/000-default.conf
         ProxyPass / balancer://mycluster/
         ProxyPassReverse / balancer://mycluster/
 
-#Restart apache server
+Restart apache server
 
 sudo systemctl restart apache2
 ```
