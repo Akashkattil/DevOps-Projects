@@ -7,7 +7,7 @@ sudo systemctl start nfs-server.service
 sudo systemctl enable nfs-server.service
 sudo systemctl status nfs-server.service
 ```
-Export the mounts for webservers’ subnet cidr to connect as clients. For simplicity, we will install wer all three Web Servers inside the same subnet, but in production set up we would probably want to separate each tier inside its own subnet for higher level of security. To check wer subnet cidr – open wer EC2 details in AWS web console and locate ‘Networking’ tab and open a Subnet link:
+Export the mounts for webservers’ subnet cidr to connect as clients. For simplicity, we will install  all three Web Servers inside the same subnet, but in production set up we would probably want to separate each tier inside its own subnet for higher level of security. To check  subnet cidr – open  EC2 details in AWS web console and locate ‘Networking’ tab and open a Subnet link:
 
 Make sure we set up permission that will allow our Web servers to read, write and execute files on NFS:
 ```
@@ -41,7 +41,7 @@ Check which port is used by NFS and open it using Security Groups (add new Inbou
 rpcinfo -p | grep nfs
 ```
 
-Important note: In order for NFS server to be accessible from wer client, we must also open following ports: TCP 111, UDP 111, UDP 2049
+Important note: In order for NFS server to be accessible from  client, we must also open following ports: TCP 111, UDP 111, UDP 2049
 
 ## Configure the db server 
 By now we should know how to install and configure a MySQL DBMS to work with remote Web Server
@@ -110,14 +110,14 @@ Deploy the tooling website’s code to the Webserver. Ensure that the html folde
 
 Note 1: Do not forget to open TCP port 80 on the Web Server.
 
-Note 2: If we encounter 403 Error – check permissions to wer /var/www/html folder and also disable SELinux sudo setenforce 0 To make this change permanent – open following config file sudo vi /etc/sysconfig/selinux and set SELINUX=disabledthen restrt httpd.
+Note 2: If we encounter 403 Error – check permissions to  /var/www/html folder and also disable SELinux sudo setenforce 0 To make this change permanent – open following config file sudo vi /etc/sysconfig/selinux and set SELINUX=disabledthen restrt httpd.
 
-Update the website’s configuration to connect to the database (in /var/www/html/functions.php file). Apply tooling-db.sql script to wer database using this command mysql -h -u -p < tooling-db.sql
+Update the website’s configuration to connect to the database (in /var/www/html/functions.php file). Apply tooling-db.sql script to  database using this command mysql -h -u -p < tooling-db.sql
 
 Create in MySQL a new admin user with username: myuser and password: password:
 
 INSERT INTO ‘users’ (‘id’, ‘username’, ‘password’, ’email’, ‘user_type’, ‘status’) VALUES -> (1, ‘myuser’, ‘5f4dcc3b5aa765d61d8327deb882cf99’, ‘user@mail.com’, ‘admin’, ‘1’);
 
-Open the website in wer browser http:///index.php and make sure we can login into the websute with myuser user.
+Open the website in  browser http:///index.php and make sure we can login into the websute with myuser user.
 
 Congratulations!
