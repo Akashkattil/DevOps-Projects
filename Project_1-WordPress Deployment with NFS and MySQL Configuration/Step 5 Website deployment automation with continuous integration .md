@@ -8,7 +8,7 @@ Acording to Circle CI, Continuous integration (CI) is a software development str
 
 In our project we are going to utilize Jenkins CI capabilities to make sure that every change made to the source code in GitHub https://github.com//tooling will be automatically be updated to the Tooling Website.
 
-# Install Jenkins server
+## Install Jenkins server
 
 1, Create an AWS EC2 server based on Ubuntu Server 20.04 LTS and name it "Jenkins"
 
@@ -42,7 +42,7 @@ Once plugins installation is done – create an admin user and  we will get   Je
 
 The installation is completed!
 
-# Configure Jenkins 
+## Configure Jenkins with Github
 Configure Jenkins to retrieve source codes from GitHub using Webhooks In this part,  we will learn how to configure a simple Jenkins job/project (these two terms can be used interchangeably). This job will will be triggered by GitHub webhooks and will execute a ‘build’ task to retrieve codes from GitHub and store it locally on Jenkins server.
 
 1, Enable webhooks in   GitHub repository settings
@@ -68,3 +68,41 @@ By default, the artifacts are stored on Jenkins server locally
 ```
 ls /var/lib/jenkins/jobs/tooling_github/builds/<build_number>/archive/
 ```
+## Configure Jenkins to copy files to NFS server via SSH
+Now we have our artifacts saved locally on Jenkins server, the next step is to copy them to our NFS server to /mnt/apps directory.
+
+Jenkins is a highly extendable application and there are 1400+ plugins available. We will need a plugin that is called "Publish Over SSH".
+
+1, Install "Publish Over SSH" plugin. On main dashboard select "Manage Jenkins" and choose "Manage Plugins" menu item.
+On "Available" tab search for "Publish Over SSH" plugin and install it
+2, Configure the job/project to copy artifacts over to NFS server. On main dashboard select "Manage Jenkins" and choose "Configure System" menu item.
+
+Scroll down to Publish over SSH plugin configuration section and configure it to be able to connect to  NFS server:
+- Provide a private key (content of .pem file that  we use to connect to NFS server via SSH/Putty)
+- Arbitrary name
+- Hostname – can be private IP address of  NFS server
+- Username – ec2-user (since NFS server is based on EC2 with RHEL 8)
+- Remote directory – /mnt/apps since our Web Servers use it as a mointing point to retrieve files from the NFS server
+
+Test the configuration and make sure the connection returns Success. Remember, that TCP port 22 on NFS server must be open to receive SSH connections.
+
+Save the configuration, open  Jenkins job/project configuration page and add another one "Post-build Action"
+
+Configure it to send all files probuced by the build into our previouslys define remote directory. In our case we want to copy all files and directories – so we use **.
+
+If  we want to apply some particular pattern to define which files to send – use this syntax.
+
+Save this configuration and go ahead, change something in README.MD file in  GitHub Tooling repository.
+
+Webhook will trigger a new job and in the "Console Output" of the job  we will find something like this:
+```
+SSH: Transferred 25 file(s)
+Finished: SUCCESS
+```
+To make sure that the files in /mnt/apps have been udated – connect via SSH/Putty to  NFS server and check README.MD file
+```
+cat /mnt/apps/README.md
+```
+If  we see the changes  we had previously made in  GitHub – the job works as expected.
+
+Congratulations! we have just implemented our first Continous Integration solution using Jenkins CI.
