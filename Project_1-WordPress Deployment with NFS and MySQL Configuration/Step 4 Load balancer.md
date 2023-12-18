@@ -17,9 +17,9 @@ In order to hide all this complexity and to have a single point of access with a
 ## Configure Apache as a Load Balancer
 
 1, Create an Ubuntu Server 20.04 EC2 instance and name it apache-lb
-2, Open TCP port 80 on Project-8-apache-lb by creating an Inbound Rule in Security Group.
+2, Open TCP port 80 on apache-lb by creating an Inbound Rule in Security Group.
 
-3, Install Apache Load Balancer on Project-8-apache-lb server and configure it to point traffic coming to LB to both Web Servers:
+3, Install Apache Load Balancer on 8-apache-lb server and configure it to point traffic coming to LB to both Web Servers:
 ```
 #Install apache2
 sudo apt update
