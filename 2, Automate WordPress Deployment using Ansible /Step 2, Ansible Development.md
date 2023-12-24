@@ -41,7 +41,7 @@ Update your inventory/dev.yml file with this snippet of code:
 [lb]
 <Load-Balancer-Private-IP-Address> ansible_ssh_user='ubuntu'
 ```
-## # CREATE A COMMON PLAYBOOK
+## CREATE A COMMON PLAYBOOK
 
 - Create a Common Playbook
 It is time to start giving Ansible the instructions on what you needs to be performed on all servers listed in inventory/dev.
