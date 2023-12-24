@@ -121,3 +121,15 @@ git commit -m "commit message"
 
 Once your code changes appear in master branch – Jenkins will do its job and save all the files (build artifacts) to 
 /var/lib/jenkins/jobs/ansible/builds/<build_number>/archive/ directory on Jenkins-Ansible server.
+
+## Run first Ansible test
+
+Now, it is time to execute ansible-playbook command and verify if your playbook actually works:
+```
+cd ansible-config-mgt
+```
+```
+ansible-playbook -i inventory/dev.yml playbooks/common.yml
+```
+You can go to each of the servers and check if wireshark has been installed by running which wireshark or wireshark --version
+
