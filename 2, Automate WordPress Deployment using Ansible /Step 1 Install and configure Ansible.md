@@ -12,7 +12,7 @@ Check your Ansible version by running ansible --version
 - Configure Webhook in GitHub and set webhook to trigger ansible build.
 - Configure a Post-build job to save all (**) files, like you did it in Project 9.
 5. Test your setup by making some change in README.MD file in master branch and make sure that builds starts automatically and Jenkins saves the files (build artifacts) in following folder
-` ls /var/lib/jenkins/jobs/ansible/builds/<build_number>/archive/ `
+``` ls /var/lib/jenkins/jobs/ansible/builds/<build_number>/archive/ ```
 Note: Trigger Jenkins project execution only for /main (master) branch.
 
 
